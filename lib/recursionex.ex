@@ -1,0 +1,75 @@
+defmodule Recursionex do
+
+  def first([head | _tail]), do: head
+
+  @doc """
+  last?
+  Prima lo scrivimo con il case usando la funzione size
+  """
+  def last([last]), do: last
+  def last([_head | tail]), do: last(tail)
+
+  def size([]), do: 0
+  def size([_head | tail]), do: 1 + size(tail)
+
+  def sum([]), do: 0
+  def sum([head | tail]), do: head + sum(tail)
+
+  @doc """
+  member?
+  Prima lo implemento con l'if element == head, poi toglgo l'if
+  """
+  def member?(_element, []), do: false
+  def member?(element, [element | _tail]), do: true
+  def member?(element, [_head | tail]), do: member?(element, tail)
+
+  def remove_first(element, [element | tail]), do: tail
+  def remove_first(element, [head | tail]), do: [head | remove_first(element, tail)]
+
+  def remove_all(_element, []), do: []
+  def remove_all(element, [element | tail]), do: remove_all(element, tail)
+  def remove_all(element, [head | tail]), do: [head | remove_all(element, tail)]
+
+
+  def replace(_element, _replacement, []), do: []
+  def replace(element, replacement, [element | tail]), do: [replacement] ++ replace(element, replacement, tail)
+  def replace(element, replacement, [head | tail]), do: [head] ++ replace(element, replacement, tail)
+
+  def map([], _fun), do: []
+  def map([head | tail], fun), do: [fun.(head)] ++ map(tail, fun)
+
+  def reduce([], acc, _fun), do: acc
+  def reduce([head | tail], acc, fun), do: reduce(tail, fun.(head, acc), fun)
+
+  def max(list), do: reduce(list, 0, fn x, acc -> if x > acc, do: x, else: acc end)
+
+  def all?(list, fun), do: reduce(list, true, fn x, acc -> acc && fun.(x) end)
+
+  def reverse([]), do: []
+  def reverse([head | tail]), do: reverse(tail) ++ [head]
+
+  def zip([], []),  do: []
+  def zip([h1 | t1], [h2 | t2]),  do: [[h1, h2]] ++ zip(t1, t2)
+
+  def find([], _fun), do: nil
+  def find([head | tail], fun) do
+    if fun.(head) do
+      head
+    else
+      find(tail, fun)
+    end
+  end
+
+  def index_of(element, list, start_from \\ 0)
+  def index_of(element, [element | _tail], start_from), do: start_from
+  def index_of(element, [_head | tail], start_from), do: index_of(element, tail, start_from + 1)
+
+  def filter([], _fun), do: []
+  def filter([head | tail], fun) do
+    if fun.(head) do
+      [head] ++ filter(tail, fun)
+    else
+      filter(tail, fun)
+    end
+  end
+end
