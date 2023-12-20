@@ -19,10 +19,11 @@
 Lodash
 - index_of
 - filter
-- sort/order_by
+- sort_by
 - find
 
 
+- value (operazioni matematiche)
 - Maze example
 - Sorting
 - Tree traversing
