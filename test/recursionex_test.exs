@@ -75,4 +75,26 @@ defmodule RecursionexTest do
     assert filter([1, 3, 4, 5, 3, 2, 7], fn x -> x > 3 end) == [4, 5, 7]
   end
 
+  test "flatten" do
+    assert flatten([[1, 4], [5, 6, 7], [5, [9, 10], 11]]) == [1, 4, 5, 6, 7, 5, 9, 10, 11]
+  end
+
+
+  test "is_palindrome" do
+    assert is_palindrome(["r", "a", "c", "e", "c", "a", "r"]) == true
+    assert is_palindrome(["n", "o", "o", "n"]) == true
+    assert is_palindrome(["a", "n", "n", "a"]) == true
+    assert is_palindrome(["h", "e", "l", "l", "o"]) == false
+  end
+
+  test "inorder traversal of a binary tree" do
+    tree =
+      BinaryTree.new(4,
+        BinaryTree.new(2, BinaryTree.new(1), BinaryTree.new(3)),
+        BinaryTree.new(6, BinaryTree.new(5), BinaryTree.new(7))
+      )
+
+    assert traverse(tree) == [1, 2, 3, 4, 5, 6, 7]
+  end
+
 end

@@ -72,4 +72,22 @@ defmodule Recursionex do
       filter(tail, fun)
     end
   end
+
+  def flatten(list), do: do_flatten(list, [])
+
+  defp do_flatten([], acc), do: acc
+  defp do_flatten([head | tail], acc) when is_list(head), do: do_flatten(tail, acc ++ do_flatten(head, []))
+  defp do_flatten([head | tail], acc), do: do_flatten(tail, acc ++ [head])
+
+  def is_palindrome(list), do: do_check_palindrome(list, reverse(list))
+
+  defp do_check_palindrome([], []), do: true
+  defp do_check_palindrome([h | t1], [h | t2]), do: do_check_palindrome(t1, t2)
+  defp do_check_palindrome([_h1 | _], [_h2 | _]), do: false
+
+
+  def traverse(nil), do: []
+  def traverse(%BinaryTree{value: value, left: left, right: right}) do
+    traverse(left) ++ [value] ++ traverse(right)
+  end
 end
