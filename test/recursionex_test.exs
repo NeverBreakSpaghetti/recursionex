@@ -6,10 +6,6 @@ defmodule RecursionexTest do
     assert size([1, 3, 7, 4, 5]) == 5
   end
 
-  test "first" do
-    assert first([3, 4, 7, 5, 1]) == 3
-  end
-
   test "last" do
     assert last([3, 4, 7, 5, 1]) == 1
   end
@@ -97,4 +93,10 @@ defmodule RecursionexTest do
     assert traverse(tree) == [1, 2, 3, 4, 5, 6, 7]
   end
 
+  test "is_even/1 is_odd/1" do
+
+    assert is_even(4) == true
+    assert is_odd(7) == true
+
+  end
 end

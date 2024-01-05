@@ -1,7 +1,5 @@
 defmodule Recursionex do
 
-  def first([head | _tail]), do: head
-
   @doc """
   last?
   Prima lo scrivimo con il case usando la funzione size
@@ -90,4 +88,10 @@ defmodule Recursionex do
   def traverse(%BinaryTree{value: value, left: left, right: right}) do
     traverse(left) ++ [value] ++ traverse(right)
   end
+
+  def is_even(0), do: true
+  def is_even(n) when n > 0, do: is_odd(n - 1)
+
+  def is_odd(1), do: true
+  def is_odd(n) when n > 0, do: is_even(n - 1)
 end
