@@ -1,5 +1,4 @@
 defmodule Recursionex do
-
   @doc """
   last?
   Prima lo scrivimo con il case usando la funzione size
@@ -28,10 +27,13 @@ defmodule Recursionex do
   def remove_all(element, [element | tail]), do: remove_all(element, tail)
   def remove_all(element, [head | tail]), do: [head | remove_all(element, tail)]
 
-
   def replace(_element, _replacement, []), do: []
-  def replace(element, replacement, [element | tail]), do: [replacement] ++ replace(element, replacement, tail)
-  def replace(element, replacement, [head | tail]), do: [head] ++ replace(element, replacement, tail)
+
+  def replace(element, replacement, [element | tail]),
+    do: [replacement] ++ replace(element, replacement, tail)
+
+  def replace(element, replacement, [head | tail]),
+    do: [head] ++ replace(element, replacement, tail)
 
   def map([], _fun), do: []
   def map([head | tail], fun), do: [fun.(head)] ++ map(tail, fun)
@@ -46,10 +48,11 @@ defmodule Recursionex do
   def reverse([]), do: []
   def reverse([head | tail]), do: reverse(tail) ++ [head]
 
-  def zip([], []),  do: []
-  def zip([h1 | t1], [h2 | t2]),  do: [[h1, h2]] ++ zip(t1, t2)
+  def zip([], []), do: []
+  def zip([h1 | t1], [h2 | t2]), do: [[h1, h2]] ++ zip(t1, t2)
 
   def find([], _fun), do: nil
+
   def find([head | tail], fun) do
     if fun.(head) do
       head
@@ -63,6 +66,7 @@ defmodule Recursionex do
   def index_of(element, [_head | tail], start_from), do: index_of(element, tail, start_from + 1)
 
   def filter([], _fun), do: []
+
   def filter([head | tail], fun) do
     if fun.(head) do
       [head] ++ filter(tail, fun)
@@ -74,7 +78,10 @@ defmodule Recursionex do
   def flatten(list), do: do_flatten(list, [])
 
   defp do_flatten([], acc), do: acc
-  defp do_flatten([head | tail], acc) when is_list(head), do: do_flatten(tail, acc ++ do_flatten(head, []))
+
+  defp do_flatten([head | tail], acc) when is_list(head),
+    do: do_flatten(tail, acc ++ do_flatten(head, []))
+
   defp do_flatten([head | tail], acc), do: do_flatten(tail, acc ++ [head])
 
   def is_palindrome(list), do: do_check_palindrome(list, reverse(list))
@@ -83,8 +90,8 @@ defmodule Recursionex do
   defp do_check_palindrome([h | t1], [h | t2]), do: do_check_palindrome(t1, t2)
   defp do_check_palindrome([_h1 | _], [_h2 | _]), do: false
 
-
   def traverse(nil), do: []
+
   def traverse(%BinaryTree{value: value, left: left, right: right}) do
     traverse(left) ++ [value] ++ traverse(right)
   end

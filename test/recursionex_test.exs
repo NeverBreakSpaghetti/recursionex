@@ -75,7 +75,6 @@ defmodule RecursionexTest do
     assert flatten([[1, 4], [5, 6, 7], [5, [9, 10], 11]]) == [1, 4, 5, 6, 7, 5, 9, 10, 11]
   end
 
-
   test "is_palindrome" do
     assert is_palindrome(["r", "a", "c", "e", "c", "a", "r"]) == true
     assert is_palindrome(["n", "o", "o", "n"]) == true
@@ -85,7 +84,8 @@ defmodule RecursionexTest do
 
   test "inorder traversal of a binary tree" do
     tree =
-      BinaryTree.new(4,
+      BinaryTree.new(
+        4,
         BinaryTree.new(2, BinaryTree.new(1), BinaryTree.new(3)),
         BinaryTree.new(6, BinaryTree.new(5), BinaryTree.new(7))
       )
@@ -94,9 +94,28 @@ defmodule RecursionexTest do
   end
 
   test "is_even/1 is_odd/1" do
-
     assert is_even(4) == true
     assert is_odd(7) == true
+  end
 
+  test "fizz buzz" do
+    assert FizzBuzz.play(16) == [
+             1,
+             2,
+             "fizz",
+             4,
+             "buzz",
+             "fizz",
+             7,
+             8,
+             "fizz",
+             "buzz",
+             11,
+             "fizz",
+             13,
+             14,
+             "fizzbuzz",
+             16
+           ]
   end
 end
