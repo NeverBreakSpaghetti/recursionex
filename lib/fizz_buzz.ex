@@ -1,18 +1,17 @@
 defmodule FizzBuzz do
   def play(n) do
-    input = build_input([1], n)
-    do_play([], input)
+    do_play([], 1, n + 1)
   end
 
-  defp do_play(res, []), do: res
+  defp do_play(res, current, max) when current == max, do: res
 
-  defp do_play(res, [h | t]) do
+  defp do_play(res, current, max) do
     ""
-    |> fizz(h)
-    |> buzz(h)
-    |> number(h)
+    |> fizz(current)
+    |> buzz(current)
+    |> number(current)
     |> then(fn fb -> res ++ [fb] end)
-    |> do_play(t)
+    |> do_play(current + 1, max)
   end
 
   defp fizz(s, h) when rem(h, 3) == 0, do: s <> "fizz"
@@ -23,10 +22,4 @@ defmodule FizzBuzz do
 
   defp number("", n), do: n
   defp number(fb, _), do: fb
-
-  defp build_input([h | t], max) when h == max, do: reverse([h | t])
-  defp build_input([h | t], max), do: build_input([h + 1, h | t], max)
-
-  defp reverse([]), do: []
-  defp reverse([head | tail]), do: reverse(tail) ++ [head]
 end
