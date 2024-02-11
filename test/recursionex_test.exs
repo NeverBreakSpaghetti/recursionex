@@ -98,6 +98,10 @@ defmodule RecursionexTest do
     assert is_odd(7) == true
   end
 
+  test "gen_list" do
+    assert gen_list(4) == [1, 2, 3, 4]
+  end
+
   test "fizz buzz" do
     assert FizzBuzz.play(16) == [
              1,
