@@ -1,17 +1,15 @@
 defmodule FizzBuzz do
-  def play(n) do
-    do_play([], 1, n + 1)
-  end
+  def play(n), do: do_play(Recursionex.gen_list(n), [])
 
-  defp do_play(res, current, max) when current == max, do: res
+  defp do_play([], acc), do: acc
+  defp do_play([n | rest], acc) do
+    current =
+      ""
+      |> fizz(n)
+      |> buzz(n)
+      |> number(n)
 
-  defp do_play(res, current, max) do
-    ""
-    |> fizz(current)
-    |> buzz(current)
-    |> number(current)
-    |> then(fn fb -> res ++ [fb] end)
-    |> do_play(current + 1, max)
+    do_play(rest, acc ++ [current])
   end
 
   defp fizz(s, h) when rem(h, 3) == 0, do: s <> "fizz"
