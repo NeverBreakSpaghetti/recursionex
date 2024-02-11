@@ -104,5 +104,5 @@ defmodule Recursionex do
 
   def gen_list(n), do: do_gen_list(n, [])
   defp do_gen_list(0, list), do: list
-  defp do_gen_list(n, list), do: do_gen_list(n-1, [n] ++ list)
+  defp do_gen_list(n, list), do: do_gen_list(n - 1, [n] ++ list)
 end
