@@ -97,12 +97,13 @@ defmodule Recursionex do
   end
 
   def is_even(0), do: true
-  def is_even(n) when n > 0, do: is_odd(n - 1)
+  def is_even(n), do: is_odd(n - 1)
 
   def is_odd(1), do: true
-  def is_odd(n) when n > 0, do: is_even(n - 1)
+  def is_odd(n), do: is_even(n - 1)
 
   def gen_list(n), do: do_gen_list(n, [])
   defp do_gen_list(0, list), do: list
   defp do_gen_list(n, list), do: do_gen_list(n - 1, [n] ++ list)
+
 end
