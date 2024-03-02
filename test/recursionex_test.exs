@@ -40,6 +40,11 @@ defmodule RecursionexTest do
   end
 
   @tag :skip
+  test "reverse" do
+    assert reverse([1, 3, 4, 5, 8]) == [8, 5, 4, 3, 1]
+  end
+
+  @tag :skip
   test "map" do
     assert map([1, 3, 2, 6], fn x -> x * 2 end) == [2, 6, 4, 12]
     assert map([1, 3, 2, 6], fn x -> x + 1 end) == [2, 4, 3, 7]
@@ -59,11 +64,6 @@ defmodule RecursionexTest do
   test "all?" do
     assert all?([4, 1, 2, 5, 3], &is_number/1) == true
     assert all?([4, 1, 2, "5", 3], &is_number/1) == false
-  end
-
-  @tag :skip
-  test "reverse" do
-    assert reverse([1, 3, 4, 5, 8]) == [8, 5, 4, 3, 1]
   end
 
   @tag :skip

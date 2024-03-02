@@ -3,11 +3,12 @@ defmodule Recursionex do
   last?
   Prima lo scrivimo con il case usando la funzione size
   """
-  def last([last]), do: last
-  def last([_head | tail]), do: last(tail)
 
   def size([]), do: 0
   def size([_head | tail]), do: 1 + size(tail)
+
+  def last([last]), do: last
+  def last([_head | tail]), do: last(tail)
 
   def sum([]), do: 0
   def sum([head | tail]), do: head + sum(tail)
@@ -53,13 +54,9 @@ defmodule Recursionex do
 
   def find([], _fun), do: nil
 
-  def find([head | tail], fun) do
-    if fun.(head) do
-      head
-    else
-      find(tail, fun)
-    end
-  end
+  def find([head | tail], fun), do: do_find([head | tail], fun, fun.(head))
+  defp do_find([head | _tail], _, true), do: head
+  defp do_find([_head | tail], fun, false), do: find(tail, fun)
 
   def index_of(element, list, start_from \\ 0)
   def index_of(element, [element | _tail], start_from), do: start_from

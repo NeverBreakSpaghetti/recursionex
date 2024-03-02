@@ -1,0 +1,220 @@
+<!-- livebook:{"persist_outputs":true} -->
+
+# Y Combinator
+
+## The len function
+
+Let's start writing a basic lenght function.
+
+```elixir
+defmodule Y do
+  def len([]), do: 0
+  def len([_h | t]), do: 1 + len(t)
+end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+{:module, Y, <<70, 79, 82, 49, 0, 0, 5, ...>>, {:len, 1}}
+```
+
+We want to rewrite `len` using only anonymous recursive functions.
+
+<!-- livebook:{"continue_on_error":true} -->
+
+```elixir
+len = fn
+  [] -> 0
+  [_ | t] -> 1 + len.(t)
+end
+
+# 0
+len.([])
+# boom!
+len.([1])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+error: undefined variable "len"
+└─ /Users/ema/dev/recursionex/y.livemd#cell:pdowglkutzgvj6kt:3
+
+```
+
+Is it possible to write a recursive anonymous function? Put another way, can you write a recursive function without being able to directly refer to yourself?
+
+```elixir
+len = fn
+  [] -> 0
+  [_ | t] -> 1 + (fn _ -> raise "boom" end).(t)
+end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Function<42.105768164/1 in :erl_eval.expr/6>
+```
+
+We can replace the `raise "boom"` with another anonymous function:
+
+```elixir
+len = fn
+  [] ->
+    0
+
+  [h | t] ->
+    1 +
+      (fn
+         [] -> 0
+         [h | t] -> 1 + (fn _ -> raise "boom" end).(t)
+       end).(t)
+end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+warning: variable "h" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+└─ /Users/ema/dev/recursionex/y.livemd#cell:cldissx4vbhjqvfg:5
+
+warning: variable "h" is unused (if the variable is not meant to be used, prefix it with an underscore)
+└─ /Users/ema/dev/recursionex/y.livemd#cell:cldissx4vbhjqvfg:3
+
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Function<42.105768164/1 in :erl_eval.expr/6>
+```
+
+This can calculate the lenght of a list of 0, 1 and 2 elements. With this technique we can build a function that calculate the lenght of a list on N elements...but it's not very feasible.
+We need something better.
+Looking at the code above (consider N nested function) there is a pattern: a repetition of a function. We can extract the repetition and define a function that create that.
+
+```elixir
+build_len = fn len ->
+  fn
+    [] -> 0
+    [_ | t] -> 1 + len.(t)
+  end
+end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Function<42.105768164/1 in :erl_eval.expr/6>
+```
+
+We can use this builder to rewrite the previous code:
+
+```elixir
+f = build_len.(fn _ -> raise "boom" end)
+
+# 0
+f.([])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+0
+```
+
+```elixir
+f = build_len.(build_len.(fn _ -> raise "boom" end))
+
+# 0
+f.([])
+# 1
+f.([:a])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+1
+```
+
+With `build_len` we can create a chain of anonymous functions that calculate the lenght of a list of 3 elements:
+
+```elixir
+f =
+  (fn build_len ->
+     build_len.(build_len.(build_len.(fn _ -> raise "boom" end)))
+   end).(fn len ->
+    fn
+      [] -> 0
+      [_ | t] -> 1 + len.(t)
+    end
+  end)
+
+f.([])
+f.([:a])
+f.([:a, :b])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+2
+```
+
+Every time we add a new build_len to the chain we can calculate the lenght of a longer list. But the lenght is still fixed at compile time.
+Thinking about how it works...every time the function is called it decides what to do: if the list is empty it returns the value, it the list contains other elements it call the len function and eventually it raise the exception if the chain is over. 
+We would like to remove the raise and substituite it with another len function.
+
+So the basic idea is to have only a two functions in the stack:
+
+* the current function
+* the next function that we eventually need to call
+
+We can rewrite the above chain like this:
+
+```elixir
+f =
+  (fn
+     build_len ->
+       # Add another layer
+       build_len.(build_len)
+   end).(fn
+    build_len ->
+      fn
+        [] -> 0
+        [_ | t] -> 1 + build_len.(t)
+      end
+  end)
+
+f.([])
+
+f.([:a])
+```
+
+```elixir
+f =
+  (fn
+     build_len ->
+       # Add another layer
+       build_len.(build_len)
+   end).(fn
+    build_len ->
+      fn
+        [] -> 0
+        [_ | t] -> 1 + build_len.(build_len).(t)
+      end
+  end)
+
+f.([])
+f.([:a])
+f.([:a, :b])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+2
+```

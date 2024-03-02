@@ -21,7 +21,7 @@
 - Conceptual differences with iterations:
     Recursion: "Focuses on breaking down a problem into simpler instances of itself."
     Iteration: "Relies on a loop construct to repeat an operation until a condition is met."
-- Advanced cases 
+- Advanced cases
   Mutual recursion: is_even/1 is_odd/1
   Accumulative Recursion (TOC Factorial)
 
@@ -42,8 +42,6 @@ defmodule Factorial do
   def calculate(n) when n > 0, do: n * calculate(n - 1)
 end
 ```
-
-
 
 ## Esempi
 - size
