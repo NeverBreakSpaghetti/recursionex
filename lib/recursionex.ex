@@ -7,6 +7,7 @@ defmodule Recursionex do
   def size([]), do: 0
   def size([_head | tail]), do: 1 + size(tail)
 
+  def last([]), do: nil
   def last([last]), do: last
   def last([_head | tail]), do: last(tail)
 
@@ -21,6 +22,7 @@ defmodule Recursionex do
   def member?(element, [element | _tail]), do: true
   def member?(element, [_head | tail]), do: member?(element, tail)
 
+  def remove_first(_element, []), do: []
   def remove_first(element, [element | tail]), do: tail
   def remove_first(element, [head | tail]), do: [head | remove_first(element, tail)]
 
@@ -35,6 +37,16 @@ defmodule Recursionex do
 
   def replace_all(element, replacement, [head | tail]),
     do: [head | replace_all(element, replacement, tail)]
+
+  def index_of(element, list, index \\ 0)
+  def index_of(element, [element | _tail], index), do: index
+  def index_of(element, [_head | tail], index), do: index_of(element, tail, index + 1)
+
+  def equals?([], []), do: true
+  def equals?(_, []), do: false
+  def equals?([], _), do: false
+  def equals?([h | tail1], [h | tail2]), do: equals?(tail1, tail2)
+  def equals?([_ | _], [_ | _]), do: false
 
   def map([], _fun), do: []
   def map([head | tail], fun), do: [fun.(head)] ++ map(tail, fun)
@@ -58,10 +70,6 @@ defmodule Recursionex do
   defp do_find([head | _tail], _, true), do: head
   defp do_find([_head | tail], fun, false), do: find(tail, fun)
 
-  def index_of(element, list, start_from \\ 0)
-  def index_of(element, [element | _tail], start_from), do: start_from
-  def index_of(element, [_head | tail], start_from), do: index_of(element, tail, start_from + 1)
-
   def filter([], _fun), do: []
 
   def filter([head | tail], fun) do
@@ -81,11 +89,11 @@ defmodule Recursionex do
 
   defp do_flatten([head | tail], acc), do: do_flatten(tail, acc ++ [head])
 
-  def is_palindrome(list), do: do_check_palindrome(list, reverse(list))
+  def is_palindrome(list), do: equals?(list, reverse(list))
 
-  defp do_check_palindrome([], []), do: true
-  defp do_check_palindrome([h | t1], [h | t2]), do: do_check_palindrome(t1, t2)
-  defp do_check_palindrome([_h1 | _], [_h2 | _]), do: false
+  # defp do_check_palindrome([], []), do: true
+  # defp do_check_palindrome([h | t1], [h | t2]), do: do_check_palindrome(t1, t2)
+  # defp do_check_palindrome([_h1 | _], [_h2 | _]), do: false
 
   def traverse(nil), do: []
 
@@ -102,5 +110,4 @@ defmodule Recursionex do
   def gen_list(n), do: do_gen_list(n, [])
   defp do_gen_list(0, list), do: list
   defp do_gen_list(n, list), do: do_gen_list(n - 1, [n] ++ list)
-
 end

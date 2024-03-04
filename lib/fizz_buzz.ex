@@ -2,6 +2,7 @@ defmodule FizzBuzz do
   def play(n), do: do_play(Recursionex.gen_list(n), [])
 
   defp do_play([], acc), do: acc
+
   defp do_play([n | rest], acc) do
     current =
       ""
