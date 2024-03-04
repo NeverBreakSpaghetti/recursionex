@@ -3,6 +3,7 @@ defmodule RecursionexTest do
   import Recursionex
 
   test "size" do
+    assert size([]) == 0
     assert size([1, 3, 7, 4, 5]) == 5
   end
 
