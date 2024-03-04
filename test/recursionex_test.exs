@@ -5,6 +5,7 @@ defmodule RecursionexTest do
   test "size" do
     assert size([]) == 0
     assert size([1, 3, 7, 4, 5]) == 5
+    assert size([1, 3, 7, 4, 5, 3, 1, 8]) == 5
   end
 
   test "last" do
