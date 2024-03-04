@@ -28,13 +28,13 @@ defmodule Recursionex do
   def remove_all(element, [element | tail]), do: remove_all(element, tail)
   def remove_all(element, [head | tail]), do: [head | remove_all(element, tail)]
 
-  def replace(_element, _replacement, []), do: []
+  def replace_all(_element, _replacement, []), do: []
 
-  def replace(element, replacement, [element | tail]),
-    do: [replacement] ++ replace(element, replacement, tail)
+  def replace_all(element, replacement, [element | tail]),
+    do: [replacement | replace_all(element, replacement, tail)]
 
-  def replace(element, replacement, [head | tail]),
-    do: [head] ++ replace(element, replacement, tail)
+  def replace_all(element, replacement, [head | tail]),
+    do: [head | replace_all(element, replacement, tail)]
 
   def map([], _fun), do: []
   def map([head | tail], fun), do: [fun.(head)] ++ map(tail, fun)

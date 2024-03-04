@@ -43,6 +43,15 @@ defmodule Factorial do
 end
 ```
 
+## The Rules
+1) When recurring on a list ask two questions about it?
+null?(list)/empty?(list) and else
+
+2) Always change 1 argument while recurring. It must be change to be closer to the termination. The changing argument must be tested in the termination condition.
+
+
+
+
 ## Esempi
 - size
 - sum
