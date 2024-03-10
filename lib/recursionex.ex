@@ -1,8 +1,4 @@
 defmodule Recursionex do
-  @doc """
-  last?
-  Prima lo scrivimo con il case usando la funzione size
-  """
 
   def size([]), do: 0
   def size([_head | tail]), do: 1 + size(tail)
@@ -14,39 +10,41 @@ defmodule Recursionex do
   def sum([]), do: 0
   def sum([head | tail]), do: head + sum(tail)
 
-  @doc """
-  member?
-  Prima lo implemento con l'if element == head, poi toglgo l'if
-  """
-  def member?(_element, []), do: false
-  def member?(element, [element | _tail]), do: true
-  def member?(element, [_head | tail]), do: member?(element, tail)
+  def member?(_el, []), do: false
+  def member?(el, [el | _tail]), do: true
+  def member?(el, [_head | tail]), do: member?(el, tail)
 
-  def remove_first(_element, []), do: []
-  def remove_first(element, [element | tail]), do: tail
-  def remove_first(element, [head | tail]), do: [head | remove_first(element, tail)]
+  def remove_first(_el, []), do: []
+  def remove_first(el, [el | tail]), do: tail
+  def remove_first(el, [head | tail]), do: [head | remove_first(el, tail)]
 
-  def remove_all(_element, []), do: []
-  def remove_all(element, [element | tail]), do: remove_all(element, tail)
-  def remove_all(element, [head | tail]), do: [head | remove_all(element, tail)]
+  def remove_all(_el, []), do: []
+  def remove_all(el, [el | tail]), do: remove_all(el, tail)
+  def remove_all(el, [head | tail]), do: [head | remove_all(el, tail)]
 
-  def replace_all(_element, _replacement, []), do: []
+  def replace_all(_el, _replacement, []), do: []
 
-  def replace_all(element, replacement, [element | tail]),
-    do: [replacement | replace_all(element, replacement, tail)]
+  def replace_all(el, replacement, [el | tail]),
+    do: [replacement | replace_all(el, replacement, tail)]
 
-  def replace_all(element, replacement, [head | tail]),
-    do: [head | replace_all(element, replacement, tail)]
+  def replace_all(el, replacement, [head | tail]),
+    do: [head | replace_all(el, replacement, tail)]
 
-  def index_of(element, list, index \\ 0)
-  def index_of(element, [element | _tail], index), do: index
-  def index_of(element, [_head | tail], index), do: index_of(element, tail, index + 1)
+  def index_of(el, list, index \\ 0)
+  def index_of(el, [el | _tail], index), do: index
+  def index_of(el, [_head | tail], index), do: index_of(el, tail, index + 1)
 
   def equals?([], []), do: true
   def equals?(_, []), do: false
   def equals?([], _), do: false
   def equals?([h | tail1], [h | tail2]), do: equals?(tail1, tail2)
   def equals?([_ | _], [_ | _]), do: false
+
+  def is_even(0), do: true
+  def is_even(n), do: is_odd(n - 1)
+
+  def is_odd(1), do: true
+  def is_odd(n), do: is_even(n - 1)
 
   def map([], _fun), do: []
   def map([head | tail], fun), do: [fun.(head)] ++ map(tail, fun)
@@ -91,21 +89,11 @@ defmodule Recursionex do
 
   def is_palindrome(list), do: equals?(list, reverse(list))
 
-  # defp do_check_palindrome([], []), do: true
-  # defp do_check_palindrome([h | t1], [h | t2]), do: do_check_palindrome(t1, t2)
-  # defp do_check_palindrome([_h1 | _], [_h2 | _]), do: false
-
   def traverse(nil), do: []
 
   def traverse(%BinaryTree{value: value, left: left, right: right}) do
     traverse(left) ++ [value] ++ traverse(right)
   end
-
-  def is_even(0), do: true
-  def is_even(n), do: is_odd(n - 1)
-
-  def is_odd(1), do: true
-  def is_odd(n), do: is_even(n - 1)
 
   def gen_list(n), do: do_gen_list(n, [])
   defp do_gen_list(0, list), do: list

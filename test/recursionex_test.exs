@@ -58,6 +58,11 @@ defmodule RecursionexTest do
     assert equals?([1, 4, 5, 2], [1, 4, 5]) == false
   end
 
+  test "is_even/1 is_odd/1" do
+    assert is_even(4) == true
+    assert is_odd(7) == true
+  end
+
   test "is_palindrome" do
     assert is_palindrome(["r", "a", "c", "e", "c", "a", "r"]) == true
     assert is_palindrome(["n", "o", "o", "n"]) == true
@@ -108,11 +113,6 @@ defmodule RecursionexTest do
       )
 
     assert traverse(tree) == [1, 2, 3, 4, 5, 6, 7]
-  end
-
-  test "is_even/1 is_odd/1" do
-    assert is_even(4) == true
-    assert is_odd(7) == true
   end
 
   test "gen_list" do
