@@ -2,19 +2,24 @@ defmodule RecursionexTest do
   use ExUnit.Case
   import Recursionex
 
-  # test "size" do
-  #   assert size([1, 3, 7, 4, 5]) == 5
-  # end
+  test "size" do
+    assert size([]) == 0
+    assert size([1, 3, 7, 4, 5]) == 5
+    assert size([1, 3, 7, 4, 5, 3, 1, 8]) == 8
+  end
 
   # test "last" do
   #   assert last([3, 4, 7, 5, 1]) == 1
+  #   assert last([]) == nil
   # end
 
   # test "sum" do
   #   assert sum([1, 3, 7, 4, 5]) == 20
+  #   assert sum([]) == 0
   # end
 
   # test "member?" do
+  #   assert member?(4, []) == false
   #   assert member?(4, [1, 3, 7, 4, 2]) == true
   #   assert member?(5, [1, 3, 7, 4, 2]) == false
   # end
@@ -22,19 +27,47 @@ defmodule RecursionexTest do
   # test "remove_first" do
   #   assert remove_first(5, [3, 4, 7, 5, 1]) == [3, 4, 7, 1]
   #   assert remove_first(5, [5, 4, 7, 5, 1]) == [4, 7, 5, 1]
+  #   assert remove_first(8, [3, 4, 7, 5, 1]) == [3, 4, 7, 5, 1]
   # end
 
   # test "remove_all" do
   #   assert remove_all(5, [5, 4, 7, 5, 1]) == [4, 7, 1]
+  #   assert remove_all(0, [5, 4, 7, 5, 1]) == [5, 4, 7, 5, 1]
   # end
 
-  # test "replace" do
-  #   assert replace(5, 3, [3, 6, 5, 4, 1]) == [3, 6, 3, 4, 1]
-  #   assert replace(5, 3, [3, 6, 5, 4, 5]) == [3, 6, 3, 4, 3]
+  # test "replace_all" do
+  #   assert replace_all(5, 3, [3, 6, 5, 4, 1]) == [3, 6, 3, 4, 1]
+  #   assert replace_all(5, 3, [3, 6, 5, 4, 5]) == [3, 6, 3, 4, 3]
+  #   assert replace_all(7, 3, [3, 6, 5, 4, 5]) == [3, 6, 5, 4, 5]
   # end
 
   # test "reverse" do
   #   assert reverse([1, 3, 4, 5, 8]) == [8, 5, 4, 3, 1]
+  #   assert reverse([]) == []
+  # end
+
+  # test "index_of" do
+  #   assert index_of(3, [1, 4, 3, 6, 7]) == 2
+  #   assert index_of(1, [1, 4, 3, 6, 7]) == 0
+  # end
+
+  # test "equals" do
+  #   assert equals?([1, 4, 5, 2], [1, 4, 5, 2]) == true
+  #   assert equals?([1, 4, 5, 2], [1, 8, 5, 2]) == false
+  #   assert equals?([1, 4, 5, 2], [1, 5, 2]) == false
+  #   assert equals?([1, 4, 5, 2], [1, 4, 5]) == false
+  # end
+
+  # test "is_even/1 is_odd/1" do
+  #   assert is_even(4) == true
+  #   assert is_odd(7) == true
+  # end
+
+  # test "is_palindrome" do
+  #   assert is_palindrome(["r", "a", "c", "e", "c", "a", "r"]) == true
+  #   assert is_palindrome(["n", "o", "o", "n"]) == true
+  #   assert is_palindrome(["a", "n", "n", "a"]) == true
+  #   assert is_palindrome(["h", "e", "l", "l", "o"]) == false
   # end
 
   # test "map" do
@@ -63,23 +96,12 @@ defmodule RecursionexTest do
   #   assert find([1, 3, 4, 5, 3, 2], fn x -> x > 3 end) == 4
   # end
 
-  # test "index_of" do
-  #   assert index_of(3, [1, 4, 3, 6, 7]) == 2
-  # end
-
   # test "filter" do
   #   assert filter([1, 3, 4, 5, 3, 2, 7], fn x -> x > 3 end) == [4, 5, 7]
   # end
 
   # test "flatten" do
   #   assert flatten([[1, 4], [5, 6, 7], [5, [9, 10], 11]]) == [1, 4, 5, 6, 7, 5, 9, 10, 11]
-  # end
-
-  # test "is_palindrome" do
-  #   assert is_palindrome(["r", "a", "c", "e", "c", "a", "r"]) == true
-  #   assert is_palindrome(["n", "o", "o", "n"]) == true
-  #   assert is_palindrome(["a", "n", "n", "a"]) == true
-  #   assert is_palindrome(["h", "e", "l", "l", "o"]) == false
   # end
 
   # test "inorder traversal of a binary tree" do
@@ -91,11 +113,6 @@ defmodule RecursionexTest do
   #     )
 
   #   assert traverse(tree) == [1, 2, 3, 4, 5, 6, 7]
-  # end
-
-  # test "is_even/1 is_odd/1" do
-  #   assert is_even(4) == true
-  #   assert is_odd(7) == true
   # end
 
   # test "gen_list" do
