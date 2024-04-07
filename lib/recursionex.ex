@@ -25,8 +25,8 @@ defmodule Recursionex do
   def replace_all(element, replacement, [element | tail]), do: [replacement | replace_all(element, replacement, tail)]
   def replace_all(element, replacement, [head | tail]), do: [head | replace_all(element, replacement, tail)]
 
-  def reverse([]), do: []
-  # this is not compliant to tail recursion optimisation
-  def reverse([head | tail]), do: reverse(tail) ++ [head]
+  def reverse(list), do: reverse_optimised(list,[])
+  def reverse_optimised([],reversedList), do: reversedList
+  def reverse_optimised([head | tail], reversedList), do: reverse_optimised(tail, [head] ++ reversedList)
 
 end
