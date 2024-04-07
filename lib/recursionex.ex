@@ -10,4 +10,7 @@ defmodule Recursionex do
   def sum([]), do: 0
   def sum([head | tail]), do: head + sum(tail)
 
+  def member?(_element, []), do: false
+  def member?(element, [head | tail]), do: element==head or member?(element, tail)
+
 end

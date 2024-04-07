@@ -18,11 +18,11 @@ defmodule RecursionexTest do
      assert sum([]) == 0
    end
 
-  # test "member?" do
-  #   assert member?(4, []) == false
-  #   assert member?(4, [1, 3, 7, 4, 2]) == true
-  #   assert member?(5, [1, 3, 7, 4, 2]) == false
-  # end
+   test "member?" do
+     assert member?(4, []) == false
+     assert member?(4, [1, 3, 7, 4, 2]) == true
+     assert member?(5, [1, 3, 7, 4, 2]) == false
+   end
 
   # test "remove_first" do
   #   assert remove_first(5, [3, 4, 7, 5, 1]) == [3, 4, 7, 1]
