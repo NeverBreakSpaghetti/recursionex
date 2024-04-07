@@ -8,10 +8,10 @@ defmodule RecursionexTest do
     assert size([1, 3, 7, 4, 5, 3, 1, 8]) == 8
   end
 
-  # test "last" do
-  #   assert last([3, 4, 7, 5, 1]) == 1
-  #   assert last([]) == nil
-  # end
+   test "last" do
+     assert last([3, 4, 7, 5, 1]) == 1
+     assert last([]) == nil
+   end
 
   # test "sum" do
   #   assert sum([1, 3, 7, 4, 5]) == 20
