@@ -46,10 +46,10 @@ defmodule RecursionexTest do
      assert reverse([]) == []
    end
 
-  # test "index_of" do
-  #   assert index_of(3, [1, 4, 3, 6, 7]) == 2
-  #   assert index_of(1, [1, 4, 3, 6, 7]) == 0
-  # end
+   test "index_of" do
+     assert index_of(3, [1, 4, 3, 6, 7]) == 2
+     assert index_of(1, [1, 4, 3, 6, 7]) == 0
+   end
 
   # test "equals" do
   #   assert equals?([1, 4, 5, 2], [1, 4, 5, 2]) == true
