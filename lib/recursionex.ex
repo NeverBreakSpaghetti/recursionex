@@ -27,6 +27,6 @@ defmodule Recursionex do
 
   def reverse(list), do: reverse_optimised(list,[])
   def reverse_optimised([],reversedList), do: reversedList
-  def reverse_optimised([head | tail], reversedList), do: reverse_optimised(tail, [head] ++ reversedList)
+  def reverse_optimised([head | tail], reversedList), do: reverse_optimised(tail, [head | reversedList])
 
 end
