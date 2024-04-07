@@ -13,10 +13,10 @@ defmodule RecursionexTest do
      assert last([]) == nil
    end
 
-  # test "sum" do
-  #   assert sum([1, 3, 7, 4, 5]) == 20
-  #   assert sum([]) == 0
-  # end
+   test "sum" do
+     assert sum([1, 3, 7, 4, 5]) == 20
+     assert sum([]) == 0
+   end
 
   # test "member?" do
   #   assert member?(4, []) == false

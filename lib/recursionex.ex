@@ -7,4 +7,7 @@ defmodule Recursionex do
   def last([lastElement]), do: lastElement
   def last([_head | tail]), do: last(tail)
 
+  def sum([]), do: 0
+  def sum([head | tail]), do: head + sum(tail)
+
 end
