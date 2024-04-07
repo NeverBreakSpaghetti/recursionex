@@ -24,11 +24,11 @@ defmodule RecursionexTest do
      assert member?(5, [1, 3, 7, 4, 2]) == false
    end
 
-  # test "remove_first" do
-  #   assert remove_first(5, [3, 4, 7, 5, 1]) == [3, 4, 7, 1]
-  #   assert remove_first(5, [5, 4, 7, 5, 1]) == [4, 7, 5, 1]
-  #   assert remove_first(8, [3, 4, 7, 5, 1]) == [3, 4, 7, 5, 1]
-  # end
+   test "remove_first" do
+     assert remove_first(5, [3, 4, 7, 5, 1]) == [3, 4, 7, 1]
+     assert remove_first(5, [5, 4, 7, 5, 1]) == [4, 7, 5, 1]
+     assert remove_first(8, [3, 4, 7, 5, 1]) == [3, 4, 7, 5, 1]
+   end
 
   # test "remove_all" do
   #   assert remove_all(5, [5, 4, 7, 5, 1]) == [4, 7, 1]

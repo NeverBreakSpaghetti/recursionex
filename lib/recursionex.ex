@@ -13,4 +13,8 @@ defmodule Recursionex do
   def member?(_element, []), do: false
   def member?(element, [head | tail]), do: element==head or member?(element, tail)
 
+  def remove_first(_element, []), do: []
+  def remove_first(element, [element | tail]), do: tail
+  def remove_first(element, [head | tail]), do: [head | remove_first(element, tail)]
+
 end
