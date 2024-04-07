@@ -20,4 +20,9 @@ defmodule Recursionex do
   def remove_all(_element, []), do: []
   def remove_all(element, [element | tail]), do: remove_all(element, tail)
   def remove_all(element, [head | tail]), do: [head | remove_all(element, tail)]
+
+  def replace_all(_element, _replacement, []), do: []
+  def replace_all(element, replacement, [element | tail]), do: [replacement | replace_all(element, replacement, tail)]
+  def replace_all(element, replacement, [head | tail]), do: [head | replace_all(element, replacement, tail)]
+
 end
