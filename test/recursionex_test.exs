@@ -30,10 +30,10 @@ defmodule RecursionexTest do
      assert remove_first(8, [3, 4, 7, 5, 1]) == [3, 4, 7, 5, 1]
    end
 
-  # test "remove_all" do
-  #   assert remove_all(5, [5, 4, 7, 5, 1]) == [4, 7, 1]
-  #   assert remove_all(0, [5, 4, 7, 5, 1]) == [5, 4, 7, 5, 1]
-  # end
+   test "remove_all" do
+     assert remove_all(5, [5, 4, 7, 5, 1]) == [4, 7, 1]
+     assert remove_all(0, [5, 4, 7, 5, 1]) == [5, 4, 7, 5, 1]
+   end
 
   # test "replace_all" do
   #   assert replace_all(5, 3, [3, 6, 5, 4, 1]) == [3, 6, 3, 4, 1]

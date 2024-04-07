@@ -17,4 +17,7 @@ defmodule Recursionex do
   def remove_first(element, [element | tail]), do: tail
   def remove_first(element, [head | tail]), do: [head | remove_first(element, tail)]
 
+  def remove_all(_element, []), do: []
+  def remove_all(element, [element | tail]), do: remove_all(element, tail)
+  def remove_all(element, [head | tail]), do: [head | remove_all(element, tail)]
 end
