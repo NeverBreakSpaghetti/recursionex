@@ -51,12 +51,12 @@ defmodule RecursionexTest do
      assert index_of(1, [1, 4, 3, 6, 7]) == 0
    end
 
-  # test "equals" do
-  #   assert equals?([1, 4, 5, 2], [1, 4, 5, 2]) == true
-  #   assert equals?([1, 4, 5, 2], [1, 8, 5, 2]) == false
-  #   assert equals?([1, 4, 5, 2], [1, 5, 2]) == false
-  #   assert equals?([1, 4, 5, 2], [1, 4, 5]) == false
-  # end
+   test "equals" do
+     assert equals?([1, 4, 5, 2], [1, 4, 5, 2]) == true
+     assert equals?([1, 4, 5, 2], [1, 8, 5, 2]) == false
+     assert equals?([1, 4, 5, 2], [1, 5, 2]) == false
+     assert equals?([1, 4, 5, 2], [1, 4, 5]) == false
+   end
 
   # test "is_even/1 is_odd/1" do
   #   assert is_even(4) == true

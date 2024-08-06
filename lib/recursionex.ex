@@ -33,4 +33,11 @@ defmodule Recursionex do
   def index_of(element, [element | _tail], index), do: index + 1
   def index_of(element, [_head | tail], index), do: index_of(element, tail, index + 1)
 
+  def equals?([],[]), do: true
+  def equals?(_,[]), do: false
+  def equals?([],_), do: false
+  def equals?([last_element_1],[last_element_2]), do: last_element_1 == last_element_2
+  def equals?([head_1 | _],[head_2 | _]) when head_1 != head_2, do: false
+  def equals?([head_1 | tail_1],[head_2 | tail_2]) when head_1 == head_2, do: equals?(tail_1,tail_2)
+
 end
